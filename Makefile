@@ -80,10 +80,10 @@ DOCKERIZE =
 
 IMPLS = ada awk bash basic c chuck clojure coffee common-lisp cpp crystal cs d dart \
 	elisp elixir elm erlang es6 factor forth fsharp go groovy gst guile haskell \
-	haxe hy io java js julia kotlin livescript logo lua make mal matlab miniMAL \
-	nasm nim objc objpascal ocaml perl perl6 php pil plpgsql plsql powershell ps \
-	python r racket rexx rpython ruby rust scala scheme skew swift swift3 tcl \
-	ts vb vhdl vimscript yorick
+	haxe hy io java js julia kotlin livescript logo lua make mal matlab micropython \
+	miniMAL nasm nim objc objpascal ocaml perl perl6 php pil plpgsql plsql \
+	powershell ps python r racket rexx rpython ruby rust scala scheme skew swift \
+	swift3 tcl ts vb vhdl vimscript yorick
 
 EXTENSION = .mal
 
@@ -212,6 +212,7 @@ make_STEP_TO_PROG =    make/$($(1)).mk
 mal_STEP_TO_PROG =     mal/$($(1)).mal
 matlab_STEP_TO_PROG =  matlab/$($(1)).m
 miniMAL_STEP_TO_PROG = miniMAL/$($(1)).json
+micropython_STEP_TO_PROG = micropython/$($(1)).py
 nasm_STEP_TO_PROG =    nasm/$($(1))
 nim_STEP_TO_PROG =     nim/$($(1))
 objc_STEP_TO_PROG =    objc/$($(1))
