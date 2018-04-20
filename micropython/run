@@ -1,0 +1,2 @@
+#!/bin/bash
+exec micropython $(dirname $0)/${STEP:-stepA_mal}.py "${@}"
