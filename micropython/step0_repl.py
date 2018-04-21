@@ -16,7 +16,7 @@ def main():
 	while True:
 		try:
 			line = input ("user> ")
-			rep(line)
+			print(rep(line))
 		except EOFError:
 			print("\nQuitting...")
 			break
