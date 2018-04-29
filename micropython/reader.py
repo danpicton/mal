@@ -17,8 +17,13 @@ def read_str(inp):
 
 def tokenizer(inp):
     out = []
+    pos = 0
 
-    while pos < range(len(inp)):
+    while pos < len(inp):
+        # skip whitespace
+        if inp[pos].isspace():
+            pass
+
         # tokenise ~ or ~@
         if inp[pos] =='~':
             if inp[pos+1] == '@':
@@ -32,25 +37,40 @@ def tokenizer(inp):
             out.append(inp[pos])
 
         # tokenise "string"
-        elif false:
-            return 1
+        elif inp[pos] == '"':
+            stringtoken = ''
+
+            stringtoken = stringtoken + ('"')
+            pos = pos + 1
+
+            while inp[pos] != '"':
+                stringtoken = stringtoken + (inp[pos])
+                pos = pos + 1
+
+            stringtoken = stringtoken + ('"')
+            out.append(stringtoken)
+            pos = pos + 1
 
         # tokenise ; comments
-        elif false:
-            return 1
+        elif inp[pos] == ';':
+            commenttoken = ';'
+            pos = pos + 1
 
-        # tokenise symbols: a, b, etc, true, false, nil
-        elif false:
-            return 1
+            while True:
+                # break on end of line or end of input
+                if pos == len(inp) or inp[pos] == '\n':
+                    break
+
+                commenttoken = commenttoken + (inp[pos])
+                pos = pos + 1
+
+            out.append(commenttoken)
+            pos = pos + 1
+
+        # tokenise symbols: a, b, etc, numbers, true, false, nil
+        elif ure.match('[\[\]{}(\'"`,;)]', inp[pos]) is None :
+            out.append(inp[pos])
 
         pos = pos + 1
-
-# HERE *********************************************
-
-    # madregex = ure.compile('[\s,]*(~@|[\[\]{}()\\\'`~^@]|"(?:\\.|[^\\"])*"|;.*|[^\s\[\]{}(\\\'"`,;)]*)')
-    # blah = ure.search(madregex, inp)
-    # blah = ure.search(r"[\s,]*(~@|[\[\]{}()'`~^@]|\"(?:\\.|[^\"])*\"|;.*|[^\s\[\]{}('\"`,;)]*)", inp)
-    blah = ure.search(r"[\s,]*(~@|[{}()'`~^@])", inp)
-    #[\s,]*(~@|[\[\]{}()'`~^@]|"(?:\\.|[^\\"])*"|;.*|[^\s\[\]{}('"`,;)]*)
-    return blah.group(1)
-
+    
+    return out
