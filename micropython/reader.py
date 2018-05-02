@@ -12,8 +12,9 @@ class Reader:
         return #token at position, don't increment
 
 def read_str(inp):
-    tokenlist = tokenizer(inp)
-    read_form(tokenlist)
+    tokens = tokenizer(inp)
+    reader = Reader(tokens)
+    read_form(reader)
 
 def tokenizer(inp):
     out = []
@@ -70,8 +71,37 @@ def tokenizer(inp):
 
         # tokenise symbols: a, b, etc, numbers, true, false, nil
         elif ure.match('[\[\]{}(\'"`,;)]', inp[pos]) is None :
-            out.append(inp[pos])
+            othertoken = ''
+
+            while True:
+                if pos == len(inp) or ure.match('[\[\]{}(\'"`,;)]', inp[pos]) is not None:
+                    break
+                
+                othertoken = othertoken + inp[pos]
+                pos = pos  + 1
+
+            out.append(othertoken)
+            continue
 
         pos = pos + 1
     
     return out
+
+def read_form(reader):
+    currchar = reader.peek()
+
+    if currchar == '(':
+        read_list(reader)
+    else:
+        read_atom(reader)
+
+def read_list(reader):
+    out = []
+
+    while reader.peek() != ')':
+        out.append(reader.next())
+
+    return out.append(')')
+
+def read_atom(reader):
+    return True # HERE
