@@ -22,7 +22,8 @@ def tokenizer(inp):
     while pos < len(inp):
         # skip whitespace
         if inp[pos].isspace():
-            pass
+            pos = pos + 1
+            continue
 
         # tokenise ~ or ~@
         if inp[pos] =='~':
